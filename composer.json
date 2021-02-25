@@ -15,5 +15,12 @@
         "psr-4": {
             "ImaraSoft\\FileMaker\\": "src/"
         }
+    },
+    "extra": {
+        "Laravel":{
+            "providers":[
+                "imarasoft\\file-maker\\FileMakerServiceProvider"
+            ]
+        }
     }
 }
