@@ -1,0 +1,19 @@
+{
+    "name": "imarasoft/file-maker",
+    "description": "Do FileMaker process according to the rules applied",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "fayizfareed",
+            "email": "vetriyalan@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "ImaraSoft\\FileMaker\\": "src/"
+        }
+    }
+}
