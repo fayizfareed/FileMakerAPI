@@ -186,14 +186,13 @@ class FileMakerBase{
                 $reflector = new ReflectionClass(get_class($this));
                 $obj = $reflector->newInstance();
                 $reflectionMethod = new ReflectionMethod($obj, 'set');
-                echo $reflectionMethod->invoke($obj, $record->fieldData);
+                $reflectionMethod->invoke($obj, $record->fieldData);
                 $objcol->push($obj);
             }
             return $objcol;
         }
         catch(Exception $ex)
         {
-            echo $ex;
             return null;
         }
     }
