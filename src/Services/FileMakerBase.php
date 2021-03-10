@@ -188,6 +188,7 @@ class FileMakerBase{
                 $reflectionMethod = new ReflectionMethod($obj, 'set');
                 $reflectionMethod->invoke($obj, $record->fieldData);
                 $objcol->push($obj);
+                
             }
             return $objcol;
         }
