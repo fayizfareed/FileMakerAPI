@@ -99,7 +99,7 @@ class FileMakerBase{
             $client = new \GuzzleHttp\Client();
             $response = $client->patch('https://'.$this->server.'/fmi/data/v1/databases/'.$this->database.'/layouts/'.class_basename($this).'/records/'.$this->recordId, 
             [ 'headers' => ['Authorization' => 'Bearer ' . $token, 'Content-Type' =>'application/json'], 'body' =>$jval]);
-            return json_decode($response->getBody())->response->recordId;
+            return $this;
         }
         catch(Exception $ex)
         {
