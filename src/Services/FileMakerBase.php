@@ -63,7 +63,10 @@ class FileMakerBase{
         foreach ($properties as $propertie)
         {
             $propertie->setAccessible(true);
-            $arrayForJSON[$propertie->getName()] = $propertie->getValue($this);
+            if ( $propertie->getValue($this) != null)
+            {
+                $arrayForJSON[$propertie->getName()] = $propertie->getValue($this);
+            }
         }
         $jval = json_encode($arrayForJSON);
         $jval = '{"fieldData":'.$jval.'}';
@@ -95,7 +98,7 @@ class FileMakerBase{
         {
             $client = new \GuzzleHttp\Client();
             $response = $client->patch('https://'.$this->server.'/fmi/data/v1/databases/'.$this->database.'/layouts/'.class_basename($this).'/records/'.$this->recordId, 
-            [ 'headers' => ['Authorization' => 'Bearer ' . $token, 'Content-Type' =>'application/json'], 'body' =>$jval],);
+            [ 'headers' => ['Authorization' => 'Bearer ' . $token, 'Content-Type' =>'application/json'], 'body' =>$jval]);
             return json_decode($response->getBody())->response->recordId;
         }
         catch(Exception $ex)
