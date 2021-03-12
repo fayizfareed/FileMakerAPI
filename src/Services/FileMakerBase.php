@@ -38,9 +38,10 @@ class FileMakerBase{
         $this->recordId = $val;
     }
     public function set($data) {
-        foreach ($data AS $key => $value) {
+        foreach ($data->fieldData AS $key => $value) {
             $this->{$key} = $value;
         }
+        $this->recordId = $data->recordId;
     }
     private function generateToken()
     {
@@ -140,7 +141,7 @@ class FileMakerBase{
                 $reflector = new ReflectionClass(get_class($this));
                 $obj = $reflector->newInstance();
                 $reflectionMethod = new ReflectionMethod($obj, 'set');
-                echo $reflectionMethod->invoke($obj, $record->fieldData);
+                echo $reflectionMethod->invoke($obj, $record);
                 $objcol->push($obj);
             }
             return $objcol;
@@ -162,7 +163,7 @@ class FileMakerBase{
 
             foreach (json_decode($response->getBody()->getContents())->response->data as $record)
             {
-                $this->set($record->fieldData);
+                $this->set($record);
                 return true;
             }
         }
@@ -186,7 +187,7 @@ class FileMakerBase{
                 $reflector = new ReflectionClass(get_class($this));
                 $obj = $reflector->newInstance();
                 $reflectionMethod = new ReflectionMethod($obj, 'set');
-                $reflectionMethod->invoke($obj, $record->fieldData);
+                $reflectionMethod->invoke($obj, $record);
                 $objcol->push($obj);
                 
             }
