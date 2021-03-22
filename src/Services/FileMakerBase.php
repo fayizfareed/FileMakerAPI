@@ -80,7 +80,7 @@ class FileMakerBase{
         {
             $client = new \GuzzleHttp\Client();
             $response = $client->post('https://'.$this->server.'/fmi/data/v1/databases/'.$this->database.'/layouts/'.class_basename($this).'/records', 
-            [ 'headers' => ['Authorization' => 'Bearer ' . $token, 'Content-Type' =>'application/json'], 'body' =>$jval],);
+            [ 'headers' => ['Authorization' => 'Bearer ' . $token, 'Content-Type' =>'application/json'], 'body' =>$jval]);
             $this->set(json_decode($response->getBody())->response->recordId);
             return json_decode($response->getBody())->response->recordId;
         }
@@ -115,7 +115,7 @@ class FileMakerBase{
         {
             $client = new \GuzzleHttp\Client();
             $response = $client->delete('https://'.$this->server.'/fmi/data/v1/databases/'.$this->database.'/layouts/'.class_basename($this).'/records/'.$this->recordId, 
-            [ 'headers' => ['Authorization' => 'Bearer ' . $token, 'Content-Type' =>'application/json']],);
+            [ 'headers' => ['Authorization' => 'Bearer ' . $token, 'Content-Type' =>'application/json']]);
             if (json_decode($response->getBody())->messages[0]->code == "0")
             {
                 return true;
@@ -139,7 +139,7 @@ class FileMakerBase{
             $objcol = collect();
             $client = new \GuzzleHttp\Client();
             $response = $client->get('https://'.$this->server.'/fmi/data/v1/databases/'.$this->database.'/layouts/'.class_basename($this).'/records', 
-            [ 'headers' => ['Authorization' => 'Bearer ' . $token, 'Content-Type' =>'application/json']],);
+            [ 'headers' => ['Authorization' => 'Bearer ' . $token, 'Content-Type' =>'application/json']]);
             foreach (json_decode($response->getBody()->getContents())->response->data as $record)
             { 
                 $reflector = new ReflectionClass(get_class($this));
@@ -163,7 +163,7 @@ class FileMakerBase{
         {
             $client = new \GuzzleHttp\Client();
             $response = $client->get('https://'.$this->server.'/fmi/data/v1/databases/'.$this->database.'/layouts/'.class_basename($this).'/records/'.$this->recordId, 
-            [ 'headers' => ['Authorization' => 'Bearer ' . $token, 'Content-Type' =>'application/json']],);
+            [ 'headers' => ['Authorization' => 'Bearer ' . $token, 'Content-Type' =>'application/json']]);
 
             foreach (json_decode($response->getBody()->getContents())->response->data as $record)
             {
@@ -185,7 +185,7 @@ class FileMakerBase{
             $objcol = collect();
             $client = new \GuzzleHttp\Client();
             $response = $client->post('https://'.$this->server.'/fmi/data/v1/databases/'.$this->database.'/layouts/'.class_basename($this).'/_find', 
-            [ 'headers' => ['Authorization' => 'Bearer ' . $token, 'Content-Type' =>'application/json'], 'body' => $where],);
+            [ 'headers' => ['Authorization' => 'Bearer ' . $token, 'Content-Type' =>'application/json'], 'body' => $where]);
             foreach (json_decode($response->getBody()->getContents())->response->data as $record)
             { 
                 $reflector = new ReflectionClass(get_class($this));
