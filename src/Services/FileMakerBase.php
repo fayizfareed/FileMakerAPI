@@ -81,7 +81,7 @@ class FileMakerBase{
             $client = new \GuzzleHttp\Client();
             $response = $client->post('https://'.$this->server.'/fmi/data/v1/databases/'.$this->database.'/layouts/'.class_basename($this).'/records', 
             [ 'headers' => ['Authorization' => 'Bearer ' . $token, 'Content-Type' =>'application/json'], 'body' =>$jval]);
-            $this->set(json_decode($response->getBody())->response->recordId);
+            $this->setRecordID(json_decode($response->getBody())->response->recordId);
             return json_decode($response->getBody())->response->recordId;
         }
         catch(Exception $ex)
